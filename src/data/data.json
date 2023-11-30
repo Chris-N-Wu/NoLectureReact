@@ -19,6 +19,38 @@
     {
       "type1": "Doctor",
       "type2": "Who"
+    },
+    {
+      "type1": "Forsyth",
+      "type2": "My"
+    },
+    {
+      "type1": "Snell Engineering",
+      "type2": "Pie"
+    },
+    {
+      "type1": "EXP",
+      "type2": "The"
+    },
+    {
+      "type1": "Interdisciplinary Science and Engineering Complex",
+      "type2": "To"
+    },
+    {
+      "type1": "Richards",
+      "type2": "Levy"
+    },
+    {
+      "type1": "West Village H",
+      "type2": "The"
+    },
+    {
+      "type1": "Levy",
+      "type2": "Was Dry"
+    },
+    {
+      "type1": "WVG",
+      "type2": "Was Dry"
     }
   ]
 }

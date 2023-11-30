@@ -1,0 +1,7 @@
+.card {
+    background-color: azure;
+}
+
+.card:hover {
+    background-color: aquamarine;
+}

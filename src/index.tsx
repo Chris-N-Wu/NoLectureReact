@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import "./styles/cards.css" // Adds custom CSS on top of bootstrap -- moved into JsonList file
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
