@@ -6,6 +6,8 @@ import {ClassMeeting} from "../types/collection";
 import supabase from "../SupabaseClient";
 import RoomCard from "./RoomCard";
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 interface IJsonListProps {
     type1: string,
@@ -36,6 +38,11 @@ const JsonList: React.FC<ClassMeeting> = (classMeeting: ClassMeeting) => {
         };
     }, [getClassData]);
 
+    useEffect(() => {
+        AOS.init(); //You can add options as per your need inside an object
+    }, []);
+
+
     let classesSet: Set<string> = new Set()
     classes.forEach(item => {
         if (item.room != null) {
@@ -49,7 +56,7 @@ const JsonList: React.FC<ClassMeeting> = (classMeeting: ClassMeeting) => {
     return (
         <Col>
             <div className={"mb-3"}>
-                <Card>
+                <Card data-aos="fade-down" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
                     <Card.Body>
                         <Card.Title> {classMeeting.building_name} </Card.Title>
                         <Card.Text>
