@@ -8,6 +8,7 @@ import RoomCard from "./RoomCard";
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import {useGlobalContext} from "../data/SupabaseData";
 
 interface IJsonListProps {
     type1: string,
@@ -15,32 +16,32 @@ interface IJsonListProps {
 }
 
 const JsonList: React.FC<ClassMeeting> = (classMeeting: ClassMeeting) => {
-    const [classes, setClasses] = useState<ClassMeeting[]>([]);
+    const { classes } = useGlobalContext()
 
-    const getClassData = useCallback(async () => {
-        const {data, error} = await supabase
-            .from("Fall_2023")
-            .select("*")
-            .eq("building_name", classMeeting.building_name ? classMeeting.building_name : "Value Is Null")
-        // .limit(20);
-        if (error) {
-            console.log("error", error);
-        } else {
-            console.log(data)
-            setClasses(data)
-        }
+    // const getClassData = useCallback(async () => {
+    //     const {data, error} = await supabase
+    //         .from("Fall_2023")
+    //         .select("*")
+    //         .eq("building_name", classMeeting.building_name ? classMeeting.building_name : "Value Is Null")
+    //     // .limit(20);
+    //     if (error) {
+    //         console.log("error", error);
+    //     } else {
+    //         console.log(data)
+    //         setClasses(data)
+    //     }
+    //
+    // }, []);
+    //
+    // useEffect(() => {
+    //     return () => {
+    //         getClassData()
+    //     };
+    // }, [getClassData]);
 
-    }, []);
-
-    useEffect(() => {
-        return () => {
-            getClassData()
-        };
-    }, [getClassData]);
-
-    useEffect(() => {
-        AOS.init(); //You can add options as per your need inside an object
-    }, []);
+    // useEffect(() => {
+    //     AOS.init(); //You can add options as per your need inside an object
+    // }, []);
 
 
     let classesSet: Set<string> = new Set()
@@ -51,20 +52,24 @@ const JsonList: React.FC<ClassMeeting> = (classMeeting: ClassMeeting) => {
     })
 
     let classesList: string[] = Array.from(classesSet)
-    classesList.sort((string1: String, string2: String) => (string1 < string2 ? -1 : 1));
+    classesList.sort((string1: String, string2: String) => (string1 < string2 ? -1 : 1));   // ordering in alphanumerical order
+
+    // console.log("Classes list as follows: ")
+    // console.log(classesList)
 
     return (
         <Col>
             <div className={"mb-3"}>
                 <Card data-aos="fade-down" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
                     <Card.Body>
-                        <Card.Title> {classMeeting.building_name} </Card.Title>
+                        <Card.Title> helllooo </Card.Title>
                         <Card.Text>
-                            <Container fluid>
+                            <Container>
                                 <Row lg={6}>
                                     {classesList.map((individualClass, i) => (
-                                        <RoomCard building={classMeeting.building_name ? classMeeting.building_name : "Null"} room={individualClass}></RoomCard>
+                                        <RoomCard room={individualClass} key={i}></RoomCard>
                                     ))}
+                                    hello
                                 </Row>
                             </Container>
                         </Card.Text>

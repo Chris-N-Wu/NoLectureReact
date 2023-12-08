@@ -1,27 +1,50 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import './App.css';
 
-import data from "./data/data.json";
 import Landing from "./components/Landing";
 import Searchbar from "./components/Searchbar";
 import HeaderBar from "./components/HeaderBar";
-console.log(data)
-
-interface IJsonListProps {
-    type1: string,
-    type2: string
-}
-
-
+import {ClassMeeting} from "./types/collection";
+import supabase from "./SupabaseClient";
+import {MyGlobalContext} from "./data/SupabaseData";
+// https://dev.to/madv/usecontext-with-typescript-23ln
 function App() {
+    const [searchData, setSearchData] = useState<string>('');
+
+    const [classes, setClasses] = useState<ClassMeeting[]>([]);
+    const getClassData = useCallback(async () => {
+        const {data, error} = await supabase
+            .from("Fall_2023")
+            .select("*")
+            // .limit(20);
+        if (error) {
+            console.log("error", error);
+        } else {
+            // console.log(data)
+            setClasses(data)
+        }
+
+    }, []);
+    useEffect(() => {
+        return () => {
+            getClassData()
+        };
+    }, [getClassData]);
 
     return (
         <>
-            <HeaderBar/>
+            <MyGlobalContext.Provider value={{classes, setClasses}}>
+                <HeaderBar/>
 
-            <Searchbar/>
+                <Searchbar onSearchbarChange={setSearchData}/>
 
-            <Landing/>
+                {/*{(value) => value.map((classd, i) => (*/}
+                {/*    <p>{i}, {classd.building_name}</p>*/}
+                {/*))}*/}
+                <Landing filter={searchData}/>
+            </MyGlobalContext.Provider>
+
+
         </>
     );
 }
