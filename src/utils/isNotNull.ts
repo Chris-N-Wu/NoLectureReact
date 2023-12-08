@@ -1,0 +1,1 @@
+export const isNotNull = <T extends unknown>(item: T | null): item is T => item !== null

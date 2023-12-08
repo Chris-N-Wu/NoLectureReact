@@ -34,7 +34,6 @@ export default function Building({building} : {building: string}) {
                                 </Row>
                             </Container>
                         </Card.Text>
-                        {/*<Card.Subtitle className={"text-muted"}> Some extraneous text </Card.Subtitle>*/}
                     </Card.Body>
                 </Card>
             </div>

@@ -1,40 +1,14 @@
-import {Container, Row} from "react-bootstrap";
-import React, {FC} from "react";
+import {Col, Container, Row} from "react-bootstrap";
+import React, {FC, useCallback, useEffect} from "react";
 import {useGlobalContext} from "../data/SupabaseData";
 import "../styles/cards.css"
 import Building from "./Building"
-
-interface Props2 {
-    filter: string
-}
+import { isNotNull } from "../utils/isNotNull";
 
 const Landing: FC<Props2> = ({filter}: Props2) => {
-    console.log(filter)
     const { classes } = useGlobalContext()
 
-    // const [classes, setClasses] = useState<ClassMeeting[]>([]);
-    //
-    // const getClassData = useCallback(async () => {
-    //     const {data, error} = await supabase
-    //         .from("distinct_building")
-    //         .select("*")
-    //         .order("building_name");
-    //     // .limit(20);
-    //     if (error) {
-    //         console.log("error", error);
-    //     } else {
-    //         console.log(data)
-    //         setClasses(data)
-    //     }
-    //
-    // },[]);
-    //
-    // useEffect(() => {
-    //     return () => {
-    //         getClassData()
-    //     };
-    // }, [getClassData]);
-
+    // removing duplicates
     const distinctBuildings = classes.filter(
         (classMeeting, i, arr) => arr.findIndex(t => t.building === classMeeting.building) === i
     );
@@ -44,17 +18,26 @@ const Landing: FC<Props2> = ({filter}: Props2) => {
         return ((first.building_name ?? "b") < (second.building_name ?? "a") ? -1 : 1)
     })
 
-    const isNotNull = <T extends unknown>(item: T | null): item is T => item !== null
-
     // returns a list of buildings while filtering out nulls
-    const distinctBuildingsNoNull = distinctBuildings.map(f=> f.building_name).filter(isNotNull)
+    let distinctBuildingsNoNull = distinctBuildings.map(f=> f.building_name).filter(isNotNull)
 
+    const distinctCallback = useCallback(
+        () => {
+            if (filter) {
+                distinctBuildingsNoNull = distinctBuildingsNoNull.filter(function (str) { return str?.toLowerCase()?.includes(filter.toLowerCase())})
+            }
+        },
+        [filter],
+    );
 
-    console.log("Distinct Buildings: ", {distinctBuildings})
+    distinctCallback()
 
     return (
         <Container className={"mt-5"}>  {/* Margin top*/}
             <Row lg={1} xs={1} sm={1} md={1}>
+                {/*<Col>*/}
+                {/*    {filter}*/}
+                {/*</Col>*/}
                 {
                     distinctBuildingsNoNull.map((classMeeting, i) => (
                         <Building building={classMeeting ?? "No Building Name"} key={i}></Building>
@@ -63,6 +46,10 @@ const Landing: FC<Props2> = ({filter}: Props2) => {
             </Row>
         </Container>
     )
+}
+
+interface Props2 {
+    filter: string
 }
 
 export default Landing
