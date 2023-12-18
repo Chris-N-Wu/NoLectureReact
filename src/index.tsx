@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {router} from "./routes/Routes";
+import { RouterProvider } from "react-router-dom";
 // import "./styles/cards.css" // Adds custom CSS on top of bootstrap -- moved into JsonList file
 
 const root = ReactDOM.createRoot(
@@ -11,7 +13,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+      <RouterProvider router={router} />
   </React.StrictMode>
 );
 

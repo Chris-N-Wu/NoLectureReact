@@ -5,7 +5,7 @@ const HeaderBar = () => {
     return (
         <Navbar bg={"danger"} variant={"dark"}>
             <Container>
-                <Navbar.Brand href="#home"> Campus Spot - Northeastern</Navbar.Brand>
+                <Navbar.Brand href="/"> <strong>Campus Spot</strong> - Northeastern</Navbar.Brand>
 
             </Container>
         </Navbar>

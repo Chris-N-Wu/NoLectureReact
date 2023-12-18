@@ -27,23 +27,20 @@ const Landing: FC<Props2> = ({filter}: Props2) => {
                 distinctBuildingsNoNull = distinctBuildingsNoNull.filter(function (str) { return str?.toLowerCase()?.includes(filter.toLowerCase())})
             }
         },
-        [filter],
+        [filter],   // useCallback on change in filter
     );
 
     distinctCallback()
 
     return (
         <Container className={"mt-5"}>  {/* Margin top*/}
-            <Row lg={1} xs={1} sm={1} md={1}>
-                {/*<Col>*/}
-                {/*    {filter}*/}
-                {/*</Col>*/}
+            {/*<Row lg={1} xs={1} sm={1} md={1}>*/}
                 {
                     distinctBuildingsNoNull.map((classMeeting, i) => (
-                        <Building building={classMeeting ?? "No Building Name"} key={i}></Building>
+                        <Building building={classMeeting} key={i}></Building>
                     ))
                 }
-            </Row>
+            {/*</Row>*/}
         </Container>
     )
 }

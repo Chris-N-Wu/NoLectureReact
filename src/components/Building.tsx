@@ -20,7 +20,7 @@ export default function Building({building} : {building: string}) {
     });
 
     return (
-        <Col>
+        // <Col>
             <div className={"mb-3"}>
                 <Card>
                     <Card.Body>
@@ -29,7 +29,7 @@ export default function Building({building} : {building: string}) {
                             <Container>
                                 <Row lg={6}>
                                     {distinctClasses.map((individualClass, i) => (
-                                        <RoomCard room={individualClass.room ?? "Null Value in Building.tsx"} key={i}></RoomCard>
+                                        <RoomCard building={building} room={individualClass.room ?? "Null Value in Building.tsx"} key={i}></RoomCard>
                                     ))}
                                 </Row>
                             </Container>
@@ -37,7 +37,7 @@ export default function Building({building} : {building: string}) {
                     </Card.Body>
                 </Card>
             </div>
-        </Col>
+        // </Col>
     )
 }
 

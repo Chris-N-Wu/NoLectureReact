@@ -7,6 +7,8 @@ import HeaderBar from "./components/HeaderBar";
 import {ClassMeeting} from "./types/collection";
 import supabase from "./SupabaseClient";
 import {MyGlobalContext} from "./data/SupabaseData";
+import RoomDescription from "./components/RoomDescription";
+import { Outlet } from "react-router";
 
 function App() {
     const [searchData, setSearchData] = useState<string>('');
@@ -35,11 +37,13 @@ function App() {
     return (
         <MyGlobalContext.Provider value={{classes, setClasses}}>
             <HeaderBar/>
+            <Outlet />
+            {/*<RoomDescription building={"Behrakis Health Sciences Cntr"} room={"010"}></RoomDescription>*/}
 
-            <Searchbar onSearchbarChange={setSearchData}/>
+            {/*<Searchbar onSearchbarChange={setSearchData}/>*/}
 
 
-            <Landing filter={searchData}/>
+            {/*<Landing filter={searchData}/>*/}
         </MyGlobalContext.Provider>
     );
 }
