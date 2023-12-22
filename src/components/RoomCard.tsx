@@ -6,6 +6,11 @@ interface Props {
     room: string
 }
 
+/**
+ * Generates a button with a link to the respective building and room
+ *
+ * @param props building: string, room: string
+ */
 export default function RoomCard(props: Props) {
     // crude implementation, but an implementation nonetheless
     let linkTo = `/${props.building}/${props.room}`

@@ -4,8 +4,8 @@ import React from "react";
 import {useGlobalContext} from "../data/SupabaseData";
 import RoomCard from "./RoomCard";
 
-export default function Building({building} : {building: string}) {
-    const { classes } = useGlobalContext()
+export default function Building({building}: { building: string }) {
+    const {classes} = useGlobalContext()
 
     // Retrieving classes that are only in this building
     const classesInBuilding = classes.filter(
@@ -20,33 +20,23 @@ export default function Building({building} : {building: string}) {
     });
 
     return (
-        // <Col>
-            <div className={"mb-3"}>
-                <Card>
-                    <Card.Body>
-                        <Card.Title> {building} </Card.Title>
-                        <Card.Text>
-                            <Container>
-                                <Row lg={6}>
-                                    {distinctClasses.map((individualClass, i) => (
-                                        <RoomCard building={building} room={individualClass.room ?? "Null Value in Building.tsx"} key={i}></RoomCard>
-                                    ))}
-                                </Row>
-                            </Container>
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
-            </div>
-        // </Col>
+        <div className={"mb-3"}>
+            <Card>
+                <Card.Body>
+                    <Card.Title> {building} </Card.Title>
+                    <Card.Text>
+                        <Container>
+                            <Row lg={6}>
+                                {distinctClasses.map((individualClass, i) => (
+                                    <RoomCard building={building}
+                                              room={individualClass.room ?? "Null Value in Building.tsx"}
+                                              key={i}></RoomCard>
+                                ))}
+                            </Row>
+                        </Container>
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+        </div>
     )
 }
-
-
-
-// const Building = ({building} : {building: string}) => {
-//     return (
-//         <h1>
-//             Hello
-//         </h1>
-//     )
-// }

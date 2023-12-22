@@ -1,12 +1,14 @@
 import {Container, Navbar} from "react-bootstrap";
-import React from "react";
+import React, {useState} from "react";
+import "../styles/HeaderBar.css"
 
 const HeaderBar = () => {
-    return (
-        <Navbar bg={"danger"} variant={"dark"}>
-            <Container>
-                <Navbar.Brand href="/"> <strong>Campus Spot</strong> - Northeastern</Navbar.Brand>
+    const [isDark, setIsDark] = useState(true);
 
+    return (
+        <Navbar className={"navbar"}>
+            <Container>
+                <Navbar.Brand className={"navbar-text"} href="/"> <strong>Campus Spot</strong> - Northeastern</Navbar.Brand>
             </Container>
         </Navbar>
     )

@@ -1,10 +1,17 @@
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
-import React, {useEffect} from "react";
+import React from "react";
 
 interface Props {
     onSearchbarChange?: (newType: string) => void;
 }
 
+/**
+ * Allows users to filter out for specific buildings.
+ *
+ * @param onSearchbarChange A set useState (string) variable to pass
+ *                          information from this component to the BuildingList
+ *                          component.
+ */
 const Searchbar = ({onSearchbarChange}: Props) => {
     return (
         <Container className="mt-5">

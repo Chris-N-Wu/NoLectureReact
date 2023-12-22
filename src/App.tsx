@@ -1,20 +1,19 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import './App.css';
+import './styles/App.css';
 
-import Landing from "./components/Landing";
-import Searchbar from "./components/Searchbar";
 import HeaderBar from "./components/HeaderBar";
 import {ClassMeeting} from "./types/collection";
 import supabase from "./SupabaseClient";
 import {MyGlobalContext} from "./data/SupabaseData";
-import RoomDescription from "./components/RoomDescription";
-import { Outlet } from "react-router";
+import {Outlet} from "react-router";
+import Footer from "./components/Footer";
 
 function App() {
-    const [searchData, setSearchData] = useState<string>('');
-
     const [classes, setClasses] = useState<ClassMeeting[]>([]);
+
+    // Retrieves data from Supabase
     const getClassData = useCallback(async () => {
+        console.log("Made API Call")
         const {data, error} = await supabase
             .from("Fall_2023")
             .select("*")
@@ -26,24 +25,19 @@ function App() {
 
     }, []); // dependencies indicate when to change this value based on another
 
+    // runs the function to get course meeting data
     useEffect(() => {
         return () => {
             getClassData().then(r => null)
         };
     }, []);
 
-
-
     return (
         <MyGlobalContext.Provider value={{classes, setClasses}}>
+
             <HeaderBar/>
-            <Outlet />
-            {/*<RoomDescription building={"Behrakis Health Sciences Cntr"} room={"010"}></RoomDescription>*/}
-
-            {/*<Searchbar onSearchbarChange={setSearchData}/>*/}
-
-
-            {/*<Landing filter={searchData}/>*/}
+            <Outlet/> {/* The routing */}
+            <Footer/>
         </MyGlobalContext.Provider>
     );
 }

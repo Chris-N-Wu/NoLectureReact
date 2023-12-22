@@ -1,0 +1,13 @@
+/* resolved class? */
+.day {
+
+}
+
+.selectedDay {
+    background-color: greenyellow;
+}
+
+.pendingClass {
+    background-color: red;
+}
+

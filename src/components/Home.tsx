@@ -1,6 +1,5 @@
-import RoomDescription from "./RoomDescription";
 import Searchbar from "./Searchbar";
-import Landing from "./Landing";
+import BuildingList from "./BuildingList";
 import React, {useState} from "react";
 
 const Home = () => {
@@ -8,11 +7,9 @@ const Home = () => {
 
     return (
         <>
-            {/*<RoomDescription building={"Behrakis Health Sciences Cntr"} room={"010"}></RoomDescription>*/}
-
             <Searchbar onSearchbarChange={setSearchData}/>
 
-            <Landing filter={searchData}/>
+            <BuildingList filter={searchData}/>
         </>
     )
 }
